@@ -16,6 +16,7 @@ jobs:
           node-version: 'lts/*'
           cache: 'npm'
 
-      - run: npm install --legacy-peer-deps
+      # ⬇️ 여기! peer dependency 충돌을 무시하고 설치
+      - run: npm install --no-audit --no-fund --legacy-peer-deps
 
       - run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
