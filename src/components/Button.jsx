@@ -1,0 +1,18 @@
+// Button.jsx  (확장자를 .jsx 로 바꾸면 더 명확해요)
+import React from 'react';
+import './button.css';
+
+export const Button = ({ primary, backgroundColor = null, size = 'medium', label, onClick }) => {
+  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+
+  return (
+    <button
+      type="button"
+      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
+      style={{ backgroundColor }}
+      onClick={onClick}
+    >
+      {label}
+    </button>
+  );
+};
