@@ -1,4 +1,4 @@
-name: Publish Storybook
+name: Storybook CI
 
 on:
   push:
@@ -6,12 +6,20 @@ on:
   pull_request:
 
 jobs:
-  chromatic-deploy:
+  chromatic:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
-      - run: npm ci || npm install
-      - run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Publish to Chromatic
+        run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
