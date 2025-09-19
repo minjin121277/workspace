@@ -1,0 +1,9 @@
+
+> build-storybook
+> storybook build --output-dir=/var/folders/c9/dg2f91wn2b39ck4838wt931r0000gn/T/chromatic--53692-QXKQT4yZanXs
+
+[1mstorybook v9.1.5
+[22m
+info => Cleaning outputDir: [36m../../../var/folders/c9/dg2f91wn2b39ck4838wt931r0000gn/T/chromatic--53692-QXKQT4yZanXs[39m
+info => Loading presets
+info => Building manager..
