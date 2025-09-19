@@ -1,0 +1,35 @@
+name: Deploy Storybook to GitHub Pages
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+          cache-dependency-path: storybook/package-lock.json
+      - name: Install dependencies
+        run: |
+          cd storybook
+          npm ci
+      - name: Build Storybook
+        run: |
+          cd storybook
+          npm run build-storybook
+      - name: Deploy to GitHub Pages
+        run: |
+          cd storybook
+          npm run deploy-storybook
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
